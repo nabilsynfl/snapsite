@@ -1,0 +1,19 @@
+Apa itu aplikasi backend: 
+backend adalah aplikasi yang dibuat untuk menyimpan dan mengelola data pada server.
+
+Aplikasi back end yang akan dibuat :
+
+Sebuah Aplikasi bernama SnapSite CMS (Content Management System) seperti wordpress, shopify, dll.
+
+teknologi yang digunakan : 
+- Node js (sebagai js runtime)
+- Express js (Sebagai framework Back End)
+- MySQL2 (sebuah Library yg digunakan untuk mempermudah kita berkomunikasi dengan database mysql)
+- Sequelize (Penerjemah bahasa Program ke bahasa Query)
+- Argon2 (sebuah kumpulan fungsi2 untuk mengamankan data sensitif kita di dalam database)
+- CORS (untuk mengontrol request dan mengatur hak izin)
+- Express-session (tools yang digunakan untuk menyimpang informasi pribadi seperti login)
+
+fitur : 
+CRUD user
+CRUS post article dan video

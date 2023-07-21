@@ -1,0 +1,23 @@
+{
+  "name": "snapsite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup-frontend": "cd frontend && npm install",
+    "setup-backend": "cd backend && npm install",
+    "start-backend": "nodemon backend/src/index.js",
+    "start-frontend": "cd frontend && npx next start",
+    "dev-frontend": "cd frontend && npx next dev",
+    "build-frontend": "cd frontend && npx next build",
+
+    "setup": "concurrently \"npm run setup-backend\" \"npm run setup-frontend\"",
+    "dev": "concurrently \"npm run start-backend\" \"npm run dev-frontend\"",
+    "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
+    "build": "concurrently \"npm run build-frontend\"",
+    "install": "concurrently \"setup-frontend\" \"setup-backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

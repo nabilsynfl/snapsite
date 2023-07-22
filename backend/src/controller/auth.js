@@ -3,8 +3,6 @@ const argon2 = require('argon2');
 
 const logIn = async (req, res) => {
     
-    
-
     try {
 
         //Validasi users
@@ -55,6 +53,7 @@ const logIn = async (req, res) => {
 }
 
 const me = async (req, res) => {
+
     try {
         if(!req.session.userId){
             return res.status(401).json({
@@ -87,6 +86,7 @@ const me = async (req, res) => {
 }
 
 const logOut = (req, res) => {
+
     try {
         req.session.destroy((err)=>{
             if(err){
@@ -107,6 +107,7 @@ const logOut = (req, res) => {
             serverMessage: error.message
         })
     }
+    
 }
 
 module.exports = {

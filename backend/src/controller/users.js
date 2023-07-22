@@ -6,11 +6,12 @@ const getAllUsers = async (req, res) => {
     //GET ALL USERS
 
     try {
-        await usersModels.findAll({
+        user = await usersModels.findAll({
             attributes: ['uuid', 'name', 'email', 'role']
         });
         return res.status(200).json({
             message: "Data pengguna berhasil ditemukan",
+            data: user
         });
     } catch (error) {
         return res.status(500).json({
@@ -45,24 +46,25 @@ const getUsersById = async(req, res) => {
 
 const createNewUsers = async (req, res) => {
 
-    const { name, email, password, address, confPassword, role } = req.body;
-
-    //VALIDASI PASSWORD
-
-    if(password !== confPassword)
-    {
-        return res.status(400).json({
-            message: "Password tidak cocok"
-        })
-    }
-
-    //END VALIDASI PASSWORD
-
-    const hashPassword = await argon2.hash(password);
-
-    //Membuat Data Users
-
     try {
+
+        const { name, email, password, address, confPassword, role } = req.body;
+
+        //VALIDASI PASSWORD
+
+        if(password !== confPassword)
+        {
+            return res.status(400).json({
+                message: "Password tidak cocok"
+            })
+        }
+
+        //END VALIDASI PASSWORD
+
+        const hashPassword = await argon2.hash(password);
+
+        //Membuat Data Users
+
         const data = await usersModels.create({
             name: name,
             email: email,
@@ -86,49 +88,50 @@ const createNewUsers = async (req, res) => {
 }
 
 const updateUsers = async (req, res) => {
-    const users = await usersModels.findOne({
-        where: {
-            uuid: req.params.id
-        }
-    })
-    
-    //Validasi Users
-
-    if(!users){
-        return res.status(404).json({
-            message: "User tidak ditemukan"
-        })
-    }
-
-    const {name, email, password, address, confPassword, role} = req.body;
-    let hashPassword;
-
-    if(name === null || password === null || email === null || role === null)
-    {
-        return res.status(400).json({
-            message: "Data Tidak boleh kosong"
-        })
-    }
-
-    if(password === "" || password === null)
-    {
-        hashPassword = users.password
-    } else {
-        hashPassword = await argon2.hash(password)
-    }
-
-    if(password !== confPassword)
-    {
-        return res.status(400).json({
-            message: "Password tidak cocok"
-        })
-    }
-
-    //End Validasi Users
-
-    //Update data ketika validasi berhasil
     
     try {
+
+        const users = await usersModels.findOne({
+            where: {
+                uuid: req.params.id
+            }
+        })
+        
+        //Validasi Users
+    
+        if(!users){
+            return res.status(404).json({
+                message: "User tidak ditemukan"
+            })
+        }
+    
+        const {name, email, password, address, confPassword, role} = req.body;
+        
+        let hashPassword;
+    
+        if(name === null || password === null || email === null || role === null)
+        {
+            return res.status(400).json({
+                message: "Data Tidak boleh kosong"
+            })
+        }
+    
+        if(password === "" || password === null)
+        {
+            hashPassword = users.password
+        } else {
+            hashPassword = await argon2.hash(password)
+        }
+    
+        if(password !== confPassword)
+        {
+            return res.status(400).json({
+                message: "Password tidak cocok"
+            })
+        }
+    
+        //End Validasi Users    
+
         const data = await usersModels.update({
             name: name,
             email: email,
@@ -145,7 +148,8 @@ const updateUsers = async (req, res) => {
         })
     } catch (error) {
         res.status(400).json({
-            message: error.message
+            message: "Terjadi Error",
+            serverMessage: error.message
         })
     }
 
@@ -153,26 +157,28 @@ const updateUsers = async (req, res) => {
 }
 
 const deleteUsers = async (req, res) => {
-    const users = await usersModels.findOne({
-        where: {
-            uuid: req.params.id
-        }
-    })
-
-    //Validasi Users
-
-    if(!users)
-    {
-        return res.status(404).json({
-            message: "User tidak ditemukan"
-        })
-    }
-
-    //End Validasi Users
-
-    //Delete Users
 
     try {
+
+        const users = await usersModels.findOne({
+            where: {
+                uuid: req.params.id
+            }
+        })
+    
+        //Validasi Users
+    
+        if(!users)
+        {
+            return res.status(404).json({
+                message: "User tidak ditemukan"
+            })
+        }
+    
+        //End Validasi Users
+    
+        //Delete Users
+
         const data = await usersModels.destroy({
             where: {
                 id: users.id

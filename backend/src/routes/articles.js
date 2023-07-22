@@ -7,7 +7,7 @@ const { verifyUsers } = require('../middleware/authUsers.js');
 router.get('/', verifyUsers, articlesController.getAllArticles)
 
 //GET ARTICLES BY ID
-router.get('/', verifyUsers, articlesController.getArticlesById)
+router.get('/:id', verifyUsers, articlesController.getArticlesById)
 
 //CREATE ARTICLES
 router.post('/', verifyUsers, articlesController.createArticles)

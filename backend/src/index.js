@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 const usersRoutes = require('./routes/users');
 const articlesRoutes = require('./routes/articles');
 const authRoutes = require('./routes/auth');
+const downloaders = require('./routes/downloaders.js');
 
 //Midleware Logs
 const middlewareLog = require('./middleware/logs');
@@ -61,6 +62,9 @@ app.use('/users', usersRoutes)
 
 //API articles
 app.use('/articles', articlesRoutes)
+
+//API Downloader youtube
+app.use('/downloaders', downloaders)
 
 
 //Server Port

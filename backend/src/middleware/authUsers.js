@@ -3,7 +3,6 @@ const usersModels = require('../models/users');
 const verifyUsers = async (req, res, next) => {
     if(!req.session.userId){
         return res.status(401).json({
-            pesanTersembunyi: "Ciee kamu mau nge hack aku yaaa hehehe",
             message: "Mohon Login terlebih dahulu"
         })
     } else {

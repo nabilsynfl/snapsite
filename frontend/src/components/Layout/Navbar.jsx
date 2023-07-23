@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="navbar-brand">
           <NavLink to={"/dashboard"} className="navbar-item">
             <img
-              src="https://bulma.io/images/bulma-logo.png"
+              src="logo.jpg"
               width="112"
               height="28"
               alt="logo"

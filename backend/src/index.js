@@ -21,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 const usersRoutes = require('./routes/users');
 const articlesRoutes = require('./routes/articles');
 const authRoutes = require('./routes/auth');
+const productsRoutes = require('./routes/products');
 const downloaders = require('./routes/downloaders.js');
 
 //Midleware Logs
@@ -28,7 +29,7 @@ const middlewareLog = require('./middleware/logs');
 
 //Midleware
 // (async()=>{
-//     await db.sync();
+//     await db.sync(Products);
 // })()
 
 const sessionStore = sequelizeStore(session.Store);
@@ -62,6 +63,9 @@ app.use('/users', usersRoutes)
 
 //API articles
 app.use('/articles', articlesRoutes)
+
+//API products
+app.use('/products', productsRoutes)
 
 //API Downloader youtube
 app.use('/downloaders', downloaders)

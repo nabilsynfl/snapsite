@@ -1,4 +1,34 @@
-GET http://localhost:4000/users/35be1f30-5135-4534-9f9c-4cc8f0fb940a
-
 POST http://localhost:4000/login
+Content-Type: application/json
 
+{
+    "email": "elyn@gmail.com",
+    "password": "085251Zz/"
+}
+
+###
+DELETE http://localhost:4000/logout
+
+###
+GET http://localhost:4000/products
+
+###
+POST http://localhost:4000/products
+Content-Type: application/json
+
+{
+    "name": "Iphone 13 Pro Max",
+    "price": 12000000
+}
+
+###
+PATCH http://localhost:4000/products/bcf51461-cd93-473c-8d15-622b19184e04
+Content-Type: application/json
+
+{
+    "name" : "Iphone 15 Updated 2",
+    "price": 1500000
+}
+
+###
+DELETE http://localhost:4000/products/bcf51461-cd93-473c-8d15-622b19184e04

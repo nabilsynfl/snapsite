@@ -1,10 +1,10 @@
 import React from "react";
 
-const FormAddUsers = () => {
+const FormEditUsers = () => {
   return (
     <div>
       <h1 className="title">Users</h1>
-      <h2 className="subtitle">Add New Users</h2>
+      <h2 className="subtitle">Update Users</h2>
       <div className="card is-shadowless">
         <div className="card-content">
           <div className="content">
@@ -60,7 +60,7 @@ const FormAddUsers = () => {
               </div>
               <div className="field mt-5">
                 <div className="control">
-                  <button className="button is-success">Save</button>
+                  <button className="button is-success">Update</button>
                 </div>
               </div>
             </form>
@@ -71,4 +71,4 @@ const FormAddUsers = () => {
   );
 };
 
-export default FormAddUsers;
+export default FormEditUsers;

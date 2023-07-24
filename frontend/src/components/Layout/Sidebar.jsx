@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   IoPerson,
   IoPriceTag,
@@ -8,18 +8,32 @@ import {
   IoPencil,
   IoSettings,
   IoPeople,
-  IoAccessibility
+  IoAccessibility,
 } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut, LoginUsers, reset } from "../../features/authSlice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+  const logout = () => {
+    dispatch(logOut());
+    dispatch(reset());
+    navigate("/login");
+  };
+
   return (
     <div>
       <aside className="menu pl-2 has-shadow">
-        <p className="menu-label"><IoAccessibility /> General</p>
+        <p className="menu-label">
+          <IoAccessibility /> General
+        </p>
         <ul className="menu-list">
           <li>
             <NavLink to={"/dashboard"}>
-              <IoHome />  Dashboard
+              <IoHome /> Dashboard
             </NavLink>
           </li>
           <li>
@@ -28,16 +42,24 @@ const Sidebar = () => {
             </NavLink>
           </li>
         </ul>
-        <p className="menu-label"><IoPeople /> Admin</p>
+        <p className="menu-label">
+          <IoPeople /> Admin
+        </p>
         <ul className="menu-list">
           <li>
-            <NavLink to={"/users"}><IoPerson /> Users</NavLink>
+            <NavLink to={"/users"}>
+              <IoPerson /> Users
+            </NavLink>
           </li>
         </ul>
-        <p className="menu-label"><IoSettings /> Settings</p>
+        <p className="menu-label">
+          <IoSettings /> Settings
+        </p>
         <ul className="menu-list">
           <li>
-            <button className="button is-white"><IoLogOut /> Log Out</button>
+            <button onClick={logout} className="button is-white">
+              <IoLogOut /> Log Out
+            </button>
           </li>
         </ul>
       </aside>

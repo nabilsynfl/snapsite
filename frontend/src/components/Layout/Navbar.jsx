@@ -1,7 +1,18 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logOut, reset } from "../../features/authSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+
+  const logout = () => {
+    dispatch(logOut());
+    dispatch(reset());
+    navigate("/login");
+  };
   return (
     <div>
       <nav
@@ -11,12 +22,7 @@ const Navbar = () => {
       >
         <div className="navbar-brand">
           <NavLink to={"/dashboard"} className="navbar-item">
-            <img
-              src="logo.jpg"
-              width="112"
-              height="28"
-              alt="logo"
-            />
+            <img src="assets/logo.jpg" width="112" height="28" alt="logo" />
           </NavLink>
 
           <a
@@ -37,7 +43,7 @@ const Navbar = () => {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                <a className="button is-light">Log Out</a>
+                <button onClick={logout} className="button is-light">Log Out</button>
               </div>
             </div>
           </div>

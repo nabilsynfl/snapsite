@@ -3,6 +3,7 @@ import Navbar from "../../components/Layout/Navbar";
 import Sidebar from "../../components/Layout/Sidebar";
 
 const Layout = ({ children }) => {
+  
   return (
     <React.Fragment>
       <Navbar />

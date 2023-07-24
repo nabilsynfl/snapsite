@@ -1,8 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Layout from './Layout';
 import ArticlesLists from '../../components/FeaturesAdmin/ArticlesLists';
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getMe } from "../../features/authSlice";
 
 const Articles = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isError } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isError) {
+      navigate("/login");
+    }
+  }, [isError, navigate]);
   return (
     <Layout>
         <ArticlesLists />

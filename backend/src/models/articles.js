@@ -28,6 +28,13 @@ const Articles = db.define('articles', {
             notEmpty: true,
         }
     },
+    thumbnail: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+        }
+    },
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -38,6 +45,8 @@ const Articles = db.define('articles', {
 }, {
     freezeTableName: true,
 });
+
+db.sync();
 
 Users.hasMany(Articles, {foreignKey: 'userId'});
 Articles.belongsTo(Users, { foreignKey: 'userId' });

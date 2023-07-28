@@ -18,7 +18,7 @@ export const LoginUsers = createAsyncThunk(
         password: user.password,
       });
 
-      return response.data;
+      return response.data.user;
     } catch (error) {
       if (error.response) {
         const message = error.response.data.message;
@@ -31,7 +31,7 @@ export const LoginUsers = createAsyncThunk(
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
     const response = await axios.get("http://localhost:4000/me");
-    return response.data;
+    return response.data.user;
   } catch (error) {
     if (error.response) {
       const message = error.response.data.message;

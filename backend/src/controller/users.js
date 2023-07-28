@@ -6,13 +6,10 @@ const getAllUsers = async (req, res) => {
     //GET ALL USERS
 
     try {
-        user = await usersModels.findAll({
-            attributes: ['uuid', 'name', 'email', 'role']
+        data = await usersModels.findAll({
+            attributes: ['uuid', 'name', 'email', 'role'],
         });
-        return res.status(200).json({
-            message: "Data pengguna berhasil ditemukan",
-            data: user
-        });
+        return res.status(200).json(data);
     } catch (error) {
         return res.status(500).json({
             message: "Terjadi kesalahan dalam memproses permintaan",
@@ -29,7 +26,7 @@ const getUsersById = async(req, res) => {
 
     try {
         const response = await usersModels.findOne({
-            attributes: ['uuid', 'name', 'email', 'role'],
+            attributes: ['uuid', 'name', 'email', 'address', 'role'],
             where: {
                 uuid: req.params.id
             },

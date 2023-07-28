@@ -21,9 +21,9 @@ const Dashboard = () => {
   }, [isError, navigate]);
 
   return (
-    <Layout>
-      <Welcome />
-    </Layout>
+      <Layout>
+        <Welcome />
+      </Layout>
   );
 };
 

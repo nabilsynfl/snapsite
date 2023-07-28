@@ -60,6 +60,12 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <div className="demo">
+                      <br></br>
+                      <p>Demo Account : </p>
+                      <p>Name : elyn@gmail.com</p>
+                      <p>password : 12345</p>
+                    </div>
                   </div>
                   <div className="field mt-5">
                     <button

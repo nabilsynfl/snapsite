@@ -7,7 +7,7 @@ const getAllArticles = async (req, res) => {
         let response;
         if(req.role === "admin"){
             response = await Articles.findAll({
-                attributes: ['uuid', 'title', 'content'],
+                attributes: ['uuid', 'title', 'content', 'thumbnail', 'createdAt'],
                 include: [{
                     model: usersModels,
                     attributes: ['name', 'email']
@@ -19,7 +19,7 @@ const getAllArticles = async (req, res) => {
                     userId: req.userId
                 },
 
-                attributes: ['uuid', 'title', 'content'] ,
+                attributes: ['uuid', 'title', 'content', 'thumbnail', 'createdAt'] ,
 
                 include: [{
                     model: usersModels,
@@ -56,7 +56,7 @@ const getArticlesById = async (req, res) => {
         let response;
         if(req.role === "admin"){
             response = await Articles.findOne({
-                attributes: ['uuid', 'title', 'content'],
+                attributes: ['uuid', 'title', 'content', 'thumbnail', 'createdAt'],
                 where: {
                     id: articles.id
                 },
@@ -71,7 +71,7 @@ const getArticlesById = async (req, res) => {
                     [Op.and] : [{id: articles.id}, {userId: req.userId}]
                 },
 
-                attributes: ['uuid', 'title', 'content'] ,
+                attributes: ['uuid', 'title', 'thumbnail', 'content'] ,
 
                 include: [{
                     model: usersModels,
@@ -92,12 +92,13 @@ const getArticlesById = async (req, res) => {
 
 const createArticles = async (req, res) => {
     
-    const {title, content} = req.body;
+    const {title, content, thumbnail} = req.body;
 
     try {
         await Articles.create({
             title: title,
             content: content,
+            thumbnail: thumbnail,
             userId: req.userId
         })
 
@@ -106,7 +107,7 @@ const createArticles = async (req, res) => {
             user: req.userId
         })
     } catch (error) {
-        return res.status(500).json({
+        return res.status(400).json({
             message: "Artikel Gagal dibuat",
             serverMessage: error.message
         })
@@ -129,11 +130,11 @@ const updateArticles = async (req, res) => {
 
     try {
 
-        const {title, content} = req.body;  
+        const {title, content, thumbnail} = req.body;  
 
         if(req.role === "admin"){
             
-           await Articles.update({title, content}, {
+           await Articles.update({title, content, thumbnail}, {
             where: {
                 id: articles.id
             }
@@ -147,7 +148,7 @@ const updateArticles = async (req, res) => {
                 })
             }
 
-            await Articles.update({title, content}, {
+            await Articles.update({title, content, thumbnail}, {
                 where: {
                     [Op.and] : [{id: articles.id}, {userId: req.userId}]
                 }

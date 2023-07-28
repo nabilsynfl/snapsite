@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   IoPerson,
-  IoPriceTag,
   IoHome,
+  IoPricetag,
   IoLogOut,
   IoPencil,
   IoSettings,
@@ -11,7 +11,7 @@ import {
   IoAccessibility,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut, LoginUsers, reset } from "../../features/authSlice";
+import { logOut, reset } from "../../features/authSlice";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -38,20 +38,29 @@ const Sidebar = () => {
           </li>
           <li>
             <NavLink to={"/articles"}>
-              <IoPencil /> article
+              <IoPencil /> Article
             </NavLink>
           </li>
-        </ul>
-        <p className="menu-label">
-          <IoPeople /> Admin
-        </p>
-        <ul className="menu-list">
           <li>
-            <NavLink to={"/users"}>
-              <IoPerson /> Users
+            <NavLink to={"/products"}>
+              <IoPricetag/> Products
             </NavLink>
           </li>
         </ul>
+        {user && user.role === "admin" && (
+          <div>
+            <p className="menu-label">
+              <IoPeople /> Admin
+            </p>
+            <ul className="menu-list">
+              <li>
+                <NavLink to={"/users"}>
+                  <IoPerson /> Users
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        )}
         <p className="menu-label">
           <IoSettings /> Settings
         </p>

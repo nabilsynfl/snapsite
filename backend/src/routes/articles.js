@@ -18,4 +18,4 @@ router.patch('/:id', verifyUsers, articlesController.updateArticles)
 //DELETE ARTICLES
 router.delete('/:id', verifyUsers, articlesController.deleteArticles)
 
-module.exports = router
+module.exports = router;

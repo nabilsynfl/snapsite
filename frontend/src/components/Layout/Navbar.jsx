@@ -1,12 +1,14 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logOut, reset } from "../../features/authSlice";
+import logo from '../../assets/logo.jpg'
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
+
+
 
   const logout = () => {
     dispatch(logOut());
@@ -22,7 +24,7 @@ const Navbar = () => {
       >
         <div className="navbar-brand">
           <NavLink to={"/dashboard"} className="navbar-item">
-            <img src="assets/logo.jpg" width="112" height="28" alt="logo" />
+            <img src={logo} width="100" height="50" alt="logo" />
           </NavLink>
 
           <a
